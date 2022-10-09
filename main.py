@@ -35,3 +35,6 @@ async def store(student:Student):
             "success": False,
             "msg":"Some problem"
         }
+
+
+print('tes')
