@@ -1,4 +1,5 @@
-from fastapi import FastAPI
+from operator import le
+from fastapi import FastAPI,HTTPException
 
 from schemas.student import Student
 from config.db import con   
@@ -8,11 +9,13 @@ app = FastAPI()
 
 @app.get('/students/{search}')
 async def index(search):
-    query = con.execute(students.select()).fetchall
+    query = con.execute(students.select().where(students.c.name.like('%'+search+'%'))).fetchall()
+    if len(query) == 0:
+        raise HTTPException(status_code=404, detail="Item not found")
     print("hasil : ",query)
     return {
         "success": True,
-        "data":"query"
+        "data":query
     }
 
 
