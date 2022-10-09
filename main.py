@@ -36,5 +36,3 @@ async def store(student:Student):
             "msg":"Some problem"
         }
 
-
-print('tes')
